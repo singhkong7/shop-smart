@@ -1,45 +1,12 @@
 import Image from "next/image"
-// import { getAllProducts } from "@/lib/actions"
+import { getAllProducts } from "@/lib/actions"
 import ProductCard from "@/components/ProductCard"
 import Searchbar from "@/components/Searchbar";
 import HeroCarousel from "@/components/HeroCarousel";
 
 
 const Home = async () => {
-  const allProducts: any[] = [
-  {
-    _id: "1",
-    title: "Apple iPhone 16 Pro Max",
-    image:require("../public/assets/images/hero-1.svg"),
-    category: "Smartphones",
-    currency: "$",
-    currentPrice: 1199,
-  },
-  {
-    _id: "2",
-    title: "Sony WH-1000XM5 Headphones",
-    image: require("../public/assets/images/hero-2.svg"),
-    category: "Audio",
-    currency: "$",
-    currentPrice: 399,
-  },
-  {
-    _id: "3",
-    title: "Apple MacBook Pro M4",
-    image:require("../public/assets/images/hero-3.svg"),
-    category: "Laptops",
-    currency: "$",
-    currentPrice: 1999,
-  },
-  {
-    _id: "4",
-    title: "Samsung Galaxy S25 Ultra",
-    image:require("../public/assets/images/hero-4.svg"),
-    category: "Smartphones",
-    currency: "$",
-    currentPrice: 1299,
-  },
-];
+  const allProducts= await getAllProducts();
 
   return (
     <>

@@ -1,3 +1,5 @@
+"use server"
+
 import Product from "../models/product.model";
 import { connectToDB } from "../mongoose";
 import {revalidatePath} from 'next/cache';
@@ -42,5 +44,31 @@ export async function scrapeAndStoreProduct(productUrl: string) {
     revalidatePath(`/products/${newProduct._id}`);
   } catch (error: any) {
     throw new Error(`Failed to create/update product: ${error.message}`)
+  }
+}
+
+export async function getProductById(productId: string) {
+  try {
+    connectToDB();
+
+    const product = await Product.findOne({ _id: productId });
+
+    if(!product) return "The requested product was not found. Please check the product ID and try again.";
+
+    return product;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function getAllProducts() {
+  try {
+    connectToDB();
+
+    const products = await Product.find();
+
+    return products;
+  } catch (error) {
+    console.log(error);
   }
 }
